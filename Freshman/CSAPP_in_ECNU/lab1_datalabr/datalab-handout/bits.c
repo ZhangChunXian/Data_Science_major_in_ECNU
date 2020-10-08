@@ -156,12 +156,14 @@ int bitAnd(int x, int y) {
  */
 int getByte(int x, int n) {
     /* The function is used to extract byte from word x*/
+    int half_indent_number = n + n;
+    int indent_number = half_indent_number + half_indent_number;
 
-    int temp = (0xFF << n);
+    int temp = (0xFF << indent_number);
 
     temp = x & temp;
 
-    int Extracted_byte = (temp >> n) & 0xFF;
+    int Extracted_byte = (temp >> indent_number) & 0xFF;
 
     return Extracted_byte;
 
@@ -175,6 +177,7 @@ int getByte(int x, int n) {
  *   Rating: 3 
  */
 int logicalShift(int x, int n) {
+
   return 2;
 }
 /*
