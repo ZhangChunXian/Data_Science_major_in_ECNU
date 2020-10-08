@@ -195,9 +195,10 @@ int bitCount(int x) {
  *   Examples: bang(3) = 0, bang(0) = 1
  *   Legal ops: ~ & ^ | + << >>
  *   Max ops: 12
- *   Rating: 4 
+ *   Rating: 4
  */
 int bang(int x) {
+  /* exploit ability of shifts to compute powers of 2 */
   return 2;
 }
 /* 
@@ -207,6 +208,7 @@ int bang(int x) {
  *   Rating: 1
  */
 int tmin(void) {
+  /* return minimum two's complement integer */
   return 2;
 }
 /* 
