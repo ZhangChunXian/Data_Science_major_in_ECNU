@@ -173,7 +173,7 @@ int getByte(int x, int n) {
  *   Examples: logicalShift(0x87654321,4) = 0x08765432
  *   Legal ops: ! ~ & ^ | + << >>
  *   Max ops: 20
- *   Rating: 3 
+ *   Rating: 3
  */
 int logicalShift(int x, int n) {
 
