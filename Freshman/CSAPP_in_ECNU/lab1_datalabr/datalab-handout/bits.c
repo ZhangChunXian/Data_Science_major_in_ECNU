@@ -146,7 +146,7 @@ int bitAnd(int x, int y) {
   int bitAndResult = ~((~temp1)|temp2);
   return bitAndResult;
 }
-/* 
+/*
  * getByte - Extract byte n from word x
  *   Bytes numbered from 0 (LSB) to 3 (MSB)
  *   Examples: getByte(0x12345678,1) = 0x56
@@ -156,7 +156,7 @@ int bitAnd(int x, int y) {
  */
 int getByte(int x, int n) {
     /* The function is used to extract byte from word x*/
-    int shift_number = n * 8;
+    int shift_number = n << 3;
 
     int temp = (0xFF << shift_number);
 
