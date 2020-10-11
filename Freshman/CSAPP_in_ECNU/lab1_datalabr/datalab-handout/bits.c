@@ -249,7 +249,7 @@ int divpwr2(int x, int n) {
     /* The function is used to Compute x/(2^n) Round toward zero*/
     int mask1 = x >> 31;
 
-    int mask2 = (0x1 << n) + ~0;
+    int mask2 = (1 << n) + ~0;
 
     return (x + (mask1 & mask2)) >> n;
 }
@@ -261,7 +261,8 @@ int divpwr2(int x, int n) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  /* The function is used to compute -x */
+  return ~x + 1;
 }
 /* 
  * isPositive - return 1 if x > 0, return 0 otherwise 

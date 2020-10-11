@@ -13,7 +13,9 @@
 
     }
 
-
+int negate(int x) {
+  return ~x + 1;
+}
 int divpwr2(int x, int n) {
     /* The function is used to Compute x/(2^n) Round toward zero*/
     int mask1 = x >> 31;
@@ -26,6 +28,10 @@ int divpwr2(int x, int n) {
 int main(){
     int a = 0xFFFFFFFF;
 
-    printf("%d\n", divpwr2(15, 1));
-    printf("%d\n", divpwr2(-33, 4));
+    printf("%d\n", negate(1));
+    printf("%d\n", negate(2));
+    printf("%d\n", negate(4));
+    printf("%d\n", negate(8));
+    printf("%d\n", negate(16));
+    printf("%d\n", negate(32));
 }
