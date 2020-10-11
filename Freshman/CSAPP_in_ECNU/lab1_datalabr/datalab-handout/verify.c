@@ -29,12 +29,17 @@ int isPositive(int x) {
   return ((x >> 31) + 1) && (x ^ 0);
 }
 
+int isLessOrEqual(int x, int y) {
+  int subtraction = y + (~x + 1);
+
+  return ((subtraction >> 31) + 1);
+}
+
 int main(){
     int a = 0xFFFFFFFF;
 
 
-    printf("%d\n", isPositive(-2));
-    printf("%d\n", isPositive(897));
-    printf("%d\n", isPositive(0));
+    printf("%d\n",isLessOrEqual(4984 ,987));
+
 
 }
