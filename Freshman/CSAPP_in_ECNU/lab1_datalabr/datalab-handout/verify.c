@@ -16,14 +16,6 @@
 int negate(int x) {
   return ~x + 1;
 }
-int divpwr2(int x, int n) {
-    /* The function is used to Compute x/(2^n) Round toward zero*/
-    int mask1 = x >> 31;
-
-    int mask2 = (0x1 << n) + ~0;
-
-    return (x + (mask1 & mask2)) >> n;
-}
 
 int isPositive(int x) {
   return ((x >> 31) + 1) && (x ^ 0);
@@ -35,11 +27,35 @@ int isLessOrEqual(int x, int y) {
   return ((subtraction >> 31) + 1);
 }
 
+unsigned float_neg2(unsigned uf) {
+  int c=0x00ffffff;
+  if(((uf<<1)^(0xffffffff))<c){
+    return uf;
+  }else{
+    return uf^(0x80000000);
+  }
+}
+
+unsigned float_neg(unsigned uf){
+  unsigned int sign = (uf >> 31) ^ 0;    // if MSB is 1, then sign = 1 , else sign = 0
+
+  unsigned int result = 0;
+
+  if(sign == 1)
+    result = uf - 2147483648;
+  else  result = uf + 2147483648;
+
+
+  if(((uf >> 23) == 255) && ((uf << 9) != 0)) result = uf;
+  return result;
+}
+
 int main(){
     int a = 0xFFFFFFFF;
 
 
-    printf("%d\n",isLessOrEqual(4984 ,987));
-
+    printf("%u\n", float_neg(a));
+    printf("%u\n", float_neg2(a));
+    printf("%u\n", a);
 
 }

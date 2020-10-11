@@ -294,9 +294,10 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4
  */
 int ilog2(int x) {
+
   return 2;
 }
-/* 
+/*
  * float_neg - Return bit-level equivalent of expression -f for
  *   floating point argument f.
  *   Both the argument and result are passed as unsigned int's, but
@@ -307,10 +308,20 @@ int ilog2(int x) {
  *   Max ops: 10
  *   Rating: 2
  */
-unsigned float_neg(unsigned uf) {
- return 2;
+unsigned float_neg(unsigned uf){
+  unsigned int sign = (uf >> 31) ^ 0;    // if MSB is 1, then sign = 1 , else sign = 0
+
+  unsigned int result = 0;
+
+  if(sign == 1)
+    result = uf - 2147483648;
+  else  result = uf + 2147483648;
+
+
+  if(((uf >> 23) == 255) && ((uf << 9) != 0)) result = uf;
+  return result;
 }
-/* 
+/*
  * float_i2f - Return bit-level equivalent of expression (float) x
  *   Result is returned as unsigned int, but
  *   it is to be interpreted as the bit-level representation of a
