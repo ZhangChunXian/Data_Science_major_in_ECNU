@@ -309,17 +309,10 @@ int ilog2(int x) {
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf){
-  unsigned int sign = (uf >> 31) ^ 0;    // if MSB is 1, then sign = 1 , else sign = 0
+    int mask = 0x00ffffff;
 
-  unsigned int result = 0;
-
-  if(sign == 1)
-    result = uf - 2147483648;
-  else  result = uf + 2147483648;
-
-
-  if(((uf >> 23) == 255) && ((uf << 9) != 0)) result = uf;
-  return result;
+    if( (~ (uf << 1)) < mask) return uf;
+    else return uf ^ (1 << 31);
 }
 /*
  * float_i2f - Return bit-level equivalent of expression (float) x
