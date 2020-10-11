@@ -193,7 +193,18 @@ int logicalShift(int x, int n) {
  *   Rating: 4
  */
 int bitCount(int x) {
-  return x;
+  int bits = 0, mask;
+  mask = 0x1 | (0x1 << 8) | (0x1 << 16) | (0x1 << 24);
+  
+  bits = bits + (x & mask);
+  bits = bits + ((x >> 1) & mask);
+  bits = bits + ((x >> 2) & mask);
+  bits = bits + ((x >> 3) & mask);
+  bits = bits + ((x >> 4) & mask);
+  bits = bits + ((x >> 5) & mask);
+  bits = bits + ((x >> 6) & mask);
+  bits = bits + ((x >> 7) & mask);
+  return (bits & 0xFF) + ((bits >> 8) & 0xFF) + ((bits >> 16) & 0xFF) + ((bits >> 24) & 0xFF);
 }
 /*
  * bang - Compute !x without using !
