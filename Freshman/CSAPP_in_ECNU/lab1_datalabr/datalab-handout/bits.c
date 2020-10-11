@@ -179,7 +179,7 @@ int logicalShift(int x, int n) {
  /* The function is used to shift x to the right by n, using a logical shift*/
   int mask1 = (1 << 31) >> 31;        // mask1 = 111..11(all 0 in 32bit)
 
-  int mask2 = (1 << 31) >> (n + (-1));   // mask2 = 1..1(n 1) 00..0(32-n 0)
+  int mask2 = (1 << 31) >> (n + (~x + x));   // mask2 = 1..1(n 1) 00..0(32-n 0)
 
   int mask3 = (mask1 ^ mask2);          // mask3 = 00..0(n 0) 11..1(32-n 0)
 
@@ -193,7 +193,7 @@ int logicalShift(int x, int n) {
  *   Rating: 4
  */
 int bitCount(int x) {
-  return 2;
+  return x;
 }
 /*
  * bang - Compute !x without using !
@@ -204,12 +204,12 @@ int bitCount(int x) {
  */
 int bang(int x) {
   /* exploit ability of shifts to compute powers of 2 */
-  x=(x>>16)|x;
-  x=(x>>8)|x;
-  x=(x>>4)|x;
-  x=(x>>2)|x;
-  x=(x>>1)|x;
-  return ~x & 0x1;
+  x = (x >> 16) | x;
+  x = (x >> 8) | x;
+  x = (x >> 4 ) | x;
+  x = (x >> 2) | x;
+  x = (x >> 1) | x;
+  return ~x & 1;
 
   return 2;
 }
@@ -233,7 +233,9 @@ int tmin(void) {
  *   Rating: 2
  */
 int fitsBits(int x, int n) {
-  return 2;
+    /* The function is used to test whether x can be  represented as an
+  n-bit, two's complement integer. */
+    return !(x ^ (x << (33 + ~n) >> (33 + ~n)));
 }
 /* 
  * divpwr2 - Compute x/(2^n), for 0 <= n <= 30
