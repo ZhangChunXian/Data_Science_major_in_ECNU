@@ -12,15 +12,20 @@
     return (x >> n) & mask3;
 
     }
-int fitsBits(int x, int n) {
- /* The function is used to
-    return !(x ^ (x << (33 + ~n) >> (33 + ~n)));
+
+
+int divpwr2(int x, int n) {
+    /* The function is used to Compute x/(2^n) Round toward zero*/
+    int mask1 = x >> 31;
+
+    int mask2 = (0x1 << n) + ~0;
+
+    return (x + (mask1 & mask2)) >> n;
 }
 
 int main(){
     int a = 0xFFFFFFFF;
 
-
-    printf("%d\n", fitsBits(5, 3));
-    printf("%d\n", fitsBits(-4, 3));
+    printf("%d\n", divpwr2(15, 1));
+    printf("%d\n", divpwr2(-33, 4));
 }

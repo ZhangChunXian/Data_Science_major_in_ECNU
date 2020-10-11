@@ -246,7 +246,12 @@ int fitsBits(int x, int n) {
  *   Rating: 2
  */
 int divpwr2(int x, int n) {
-    return 2;
+    /* The function is used to Compute x/(2^n) Round toward zero*/
+    int mask1 = x >> 31;
+
+    int mask2 = (0x1 << n) + ~0;
+
+    return (x + (mask1 & mask2)) >> n;
 }
 /* 
  * negate - return -x 
