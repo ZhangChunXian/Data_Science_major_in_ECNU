@@ -326,7 +326,7 @@ unsigned float_neg(unsigned uf){
 unsigned float_i2f(int x) {
 
   int sign = x >> 31 & 1;
-  int i, exponent, fraction, delta, mask;
+  int i, exponent, fraction, delta;
 
   if(x == 0)  return 0;
   if( x == 0x80000000) exponent = 158;
@@ -349,7 +349,6 @@ unsigned float_i2f(int x) {
   }
 
   return (sign << 31) | (exponent << 23) | fraction;
-
 }
 /*
  * float_twice - Return bit-level equivalent of expression 2*f for
@@ -363,5 +362,12 @@ unsigned float_i2f(int x) {
  *   Rating: 4
  */
 unsigned float_twice(unsigned uf) {
-  return 2;
+  unsigned sign = (uf >> 31) & 0x01;
+  unsigned exp = (uf >> 23) & 0xff;
+
+  if(exp == 0) uf = (uf << 1) + (sign << 31);
+  else if(exp != 0xff){
+    uf = uf & 0x807fffff + ((exp + 1) << 23);
+  }
+  return uf;
 }
