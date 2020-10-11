@@ -294,8 +294,34 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4
  */
 int ilog2(int x) {
+  int mask1, mask2, mask3, mask4, mask5;
+  x = x | (x >> 1);
+  x = x | (x >> 2);
+  x = x | (x >> 4);
+  x = x | (x >> 8);
+  x = x | (x >> 16);
 
-  return 2;
+
+  mask1 = ((0x55 << 8 | 0x55) << 16) | (0x55 << 8 | 0x55);
+
+  mask2 = ((0x33 << 8 | 0x33) << 16) | (0x33 << 8 | 0x33);
+
+  mask3 = ((0x0F << 8 | 0x0F) << 16) | (0x0F << 8 | 0x0F);
+
+  mask4 = 0xFF << 16 | 0xFF;
+
+  mask5 = 0xFF << 8 | 0xFF;
+
+  x = (x & mask1) + ((x >> 1) & mask1);
+
+  x = (x & mask2) + ((x >> 2) & mask2);
+
+  x = (x & mask3) + ((x >> 4) & mask3);
+
+  x = (x & mask4) + ((x >> 8) & mask4);
+
+  x = (x & mask5) + ((x >> 16) & mask5);
+  return x + (~1) + 1;
 }
 /*
  * float_neg - Return bit-level equivalent of expression -f for
