@@ -25,13 +25,16 @@ int divpwr2(int x, int n) {
     return (x + (mask1 & mask2)) >> n;
 }
 
+int isPositive(int x) {
+  return ((x >> 31) + 1) && (x ^ 0);
+}
+
 int main(){
     int a = 0xFFFFFFFF;
 
-    printf("%d\n", negate(1));
-    printf("%d\n", negate(2));
-    printf("%d\n", negate(4));
-    printf("%d\n", negate(8));
-    printf("%d\n", negate(16));
-    printf("%d\n", negate(32));
+
+    printf("%d\n", isPositive(-2));
+    printf("%d\n", isPositive(897));
+    printf("%d\n", isPositive(0));
+
 }
