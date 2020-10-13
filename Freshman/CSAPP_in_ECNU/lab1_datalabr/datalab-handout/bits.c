@@ -132,7 +132,7 @@ NOTES:
 
 #endif
 /* 
- * bitAnd - x&y using only ~ and | 
+ * bitAnd - x&y using only ~ and |
  *   Example: bitAnd(6, 5) = 4
  *   Legal ops: ~ |
  *   Max ops: 8
@@ -140,11 +140,8 @@ NOTES:
  */
 int bitAnd(int x, int y) {
   /* This function is used to operate & using only ~ and | */
-  int temp1 = x|y;
-  int temp2 = (~x)|(~y);
 
-  int bitAndResult = ~((~temp1)|temp2);
-  return bitAndResult;
+  return ~((~(x | y))| ((~x)|(~y)));
 }
 /*
  * getByte - Extract byte n from word x
@@ -162,7 +159,7 @@ int getByte(int x, int n) {
 
     temp = x & temp;
 
-    int Extracted_byte = (temp >> indent_number) & 0xFF;
+    int Extracted_byte = (temp >> shift_number ) & 0xFF;
 
     return Extracted_byte;
 
@@ -222,7 +219,6 @@ int bang(int x) {
   x = (x >> 1) | x;
   return ~x & 1;
 
-  return 2;
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -283,10 +279,10 @@ int negate(int x) {
  *   Rating: 3
  */
 int isPositive(int x) {
-  return ((x >> 31) + 1) && (x ^ 0);
+  return ((x >> 31) + 1) & !(!x);
 }
-/* 
- * isLessOrEqual - if x <= y  then return 1, else return 0 
+/*
+ * isLessOrEqual - if x <= y  then return 1, else return 0
  *   Example: isLessOrEqual(4,5) = 1.
  *   Legal ops: ! ~ & ^ | + << >>
  *   Max ops: 24
@@ -363,7 +359,7 @@ unsigned float_neg(unsigned uf){
 unsigned float_i2f(int x) {
 
   int sign = x >> 31 & 1;
-  int i, exponent, fraction, delta;
+  int i=30, exponent, fraction, delta;
 
   if(x == 0)  return 0;
   if( x == 0x80000000) exponent = 158;
